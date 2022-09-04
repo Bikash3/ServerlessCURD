@@ -1,2 +1,2 @@
 # ServerlessCURD
-ServerLess S3 SQS Lambda CURD operation
+ServerLess S3 SQS Lambda API Gateway CURD operation
