@@ -8,8 +8,8 @@ provider:
   apiName: ${self:service}
   memorySize: 128
   timeout: 10
-  enviroment:
-    FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
+  # enviroment:
+  #   FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
 
 plugins:
   - serverless-iam-roles-per-function
