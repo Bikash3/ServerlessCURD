@@ -14,7 +14,7 @@ provider:
 plugins:
   - serverless-iam-roles-per-function
 custom:
-  fileBucketName: s3-file-bucket-${self:provider.stage}
+  fileBucketName: BIKs3-file-bucket-${self:provider.stage}
 
 functions:
   s3FileUploader:
