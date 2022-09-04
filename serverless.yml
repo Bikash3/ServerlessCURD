@@ -1,4 +1,4 @@
-service: s3-file-api
+service: s3-file-uploadapi
 
 provider:
   name: aws
