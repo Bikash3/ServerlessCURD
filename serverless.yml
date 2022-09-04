@@ -11,22 +11,28 @@ provider:
   enviroment:
     FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileBucketName}
 
-  custom:
-    fileBucketName: s3-file-bucket-${self:provider.stage}
+plugins:
+  - serverless-iam-roles-per-function
+custom:
+  fileBucketName: s3-file-bucket-${self:provider.stage}
 
-  functions:
-    s3FileUploader:
-      handler: src/upload.handler
-      name: s3-file-uploader
-      events:
-        - http:
-            path: file
-            method: POST
-      iamRoleStatements:
-  resources:
-    Resources:
-      FileBucket:
-        Type: AWS::S3::Bucket
-        Properties:
-          BucketName: ${self:custom.fileBucketName}
-          AccessControl: Private
+functions:
+  s3FileUploader:
+    handler: src/upload.handler
+    name: s3-file-uploader
+    events:
+      - http:
+          path: file
+          method: POST
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - "s3::Put*"
+        Resource: arn:aws:s3:::${self:custom.fileBucketName}/*
+resources:
+  Resources:
+    FileBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.fileBucketName}
+        AccessControl: Private
