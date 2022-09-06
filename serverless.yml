@@ -19,7 +19,7 @@ custom:
 functions:
   s3FileUploader:
     handler: src/upload.handler
-    name: s3-file-uploader
+    name: s3-file-uploader-bik
     events:
       - http:
           path: file
@@ -36,3 +36,8 @@ resources:
       Properties:
         BucketName: ${self:custom.fileBucketName}
         AccessControl: Private
+    NewSQSQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: sqs-queue-${opt:stage, self:provider.stage}.fifo
+        FifoQueue: true
